@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "개발자 성격 테스트 API",
+    "description": "개발자 성격 유형을 알아보는 테스트 API 서버",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/api/questions": {
+      "get": {
+        "summary": "전체 질문 목록 조회",
+        "description": "모든 테스트 질문을 반환합니다.",
+        "tags": ["Questions"],
+        "responses": {
+          "200": {
+            "description": "질문 목록 반환 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Question"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/questions/{id}": {
+      "get": {
+        "summary": "특정 질문 조회",
+        "description": "ID에 해당하는 질문을 반환합니다.",
+        "tags": ["Questions"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "질문 ID (1~10)",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "질문 반환 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "질문을 찾을 수 없음",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "해당 질문을 찾을 수 없습니다."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/results/{type}": {
+      "get": {
+        "summary": "특정 개발자 타입 결과 조회",
+        "description": "개발자 타입에 해당하는 결과를 반환합니다.",
+        "tags": ["Results"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "개발자 타입",
+            "schema": {
+              "type": "string",
+              "enum": ["frontend", "backend", "fullstack", "data", "mobile", "devops", "gamedev", "ai"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "결과 반환 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "개발자 타입을 찾을 수 없음",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "해당 개발자 타입을 찾을 수 없습니다."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/submit": {
+      "post": {
+        "summary": "테스트 결과 제출",
+        "description": "사용자의 답변을 제출하고 가장 많이 선택된 개발자 타입의 결과를 반환합니다.",
+        "tags": ["Submit"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitRequest"
+              },
+              "example": {
+                "answers": ["frontend", "backend", "data", "fullstack", "ai", "data", "ai", "mobile", "data", "devops"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "결과 반환 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeveloperResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_answers": {
+                    "summary": "answers 배열 누락",
+                    "value": {
+                      "error": "answers 배열이 필요합니다."
+                    }
+                  },
+                  "invalid_type": {
+                    "summary": "유효하지 않은 타입",
+                    "value": {
+                      "error": "유효하지 않은 타입입니다: invalidType"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QuestionOption": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "선택지 텍스트",
+            "example": "사용자가 볼 화면부터 디자인한다"
+          },
+          "type": {
+            "type": "string",
+            "description": "개발자 타입",
+            "enum": ["frontend", "backend", "fullstack", "data", "mobile", "devops", "gamedev", "ai"],
+            "example": "frontend"
+          }
+        },
+        "required": ["text", "type"]
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "질문 ID",
+            "example": 1
+          },
+          "text": {
+            "type": "string",
+            "description": "질문 텍스트",
+            "example": "새로운 프로젝트를 시작할 때 가장 먼저 하는 일은?"
+          },
+          "options": {
+            "type": "array",
+            "description": "선택지 목록",
+            "items": {
+              "$ref": "#/components/schemas/QuestionOption"
+            }
+          }
+        },
+        "required": ["id", "text", "options"]
+      },
+      "DeveloperResult": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "개발자 타입",
+            "enum": ["frontend", "backend", "fullstack", "data", "mobile", "devops", "gamedev", "ai"],
+            "example": "frontend"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "이모지",
+            "example": "🐹✨"
+          },
+          "name": {
+            "type": "string",
+            "description": "타입 이름",
+            "example": "프론트엔드 벌"
+          },
+          "title": {
+            "type": "string",
+            "description": "타입 타이틀",
+            "example": "예쁜 걸 사랑하는 디자이너 벌"
+          },
+          "description": {
+            "type": "string",
+            "description": "타입 설명"
+          },
+          "characteristics": {
+            "type": "array",
+            "description": "특성 목록",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hashtags": {
+            "type": "array",
+            "description": "해시태그 목록",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["type", "emoji", "name", "title", "description", "characteristics", "hashtags"]
+      },
+      "SubmitRequest": {
+        "type": "object",
+        "properties": {
+          "answers": {
+            "type": "array",
+            "description": "각 질문에서 선택한 개발자 타입 배열",
+            "items": {
+              "type": "string",
+              "enum": ["frontend", "backend", "fullstack", "data", "mobile", "devops", "gamedev", "ai"]
+            }
+          }
+        },
+        "required": ["answers"]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "에러 메시지"
+          }
+        },
+        "required": ["error"]
+      }
+    }
+  }
+}

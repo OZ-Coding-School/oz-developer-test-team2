@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "text": "새로운 프로젝트를 시작할 때 가장 먼저 하는 일은?",
+    "options": [
+      { "text": "사용자가 볼 화면부터 디자인한다", "type": "frontend" },
+      { "text": "데이터베이스 구조를 먼저 설계한다", "type": "backend" }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "어떤 문제 해결에 흥미를 느끼나요?",
+    "options": [
+      { "text": "화면이 예쁘게 보이도록 만드는 것", "type": "frontend" },
+      { "text": "복잡한 로직과 알고리즘 구현", "type": "backend" }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "가장 관심 있는 기술 분야는?",
+    "options": [
+      { "text": "데이터 분석과 머신러닝", "type": "data" },
+      { "text": "모바일 앱 개발", "type": "mobile" }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "협업할 때 나의 역할은?",
+    "options": [
+      { "text": "프론트엔드와 백엔드 모두 다룬다", "type": "fullstack" },
+      { "text": "서버 배포와 인프라 관리", "type": "devops" }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "가장 만들고 싶은 프로젝트는?",
+    "options": [
+      { "text": "게임이나 인터랙티브 콘텐츠", "type": "gamedev" },
+      { "text": "AI 챗봇이나 추천 시스템", "type": "ai" }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "개발할 때 가장 뿌듯한 순간은?",
+    "options": [
+      { "text": "혼자서 서비스 전체를 완성했을 때", "type": "fullstack" },
+      { "text": "데이터에서 숨겨진 패턴을 발견했을 때", "type": "data" }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "팀에서 가장 하고 싶은 업무는?",
+    "options": [
+      { "text": "배포 파이프라인을 자동화하는 것", "type": "devops" },
+      { "text": "AI 모델을 학습시키고 성능을 높이는 것", "type": "ai" }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "주말에 사이드 프로젝트를 한다면?",
+    "options": [
+      { "text": "간단한 모바일 앱을 만들어본다", "type": "mobile" },
+      { "text": "미니 게임을 만들어본다", "type": "gamedev" }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "새로운 기술을 배울 때 끌리는 주제는?",
+    "options": [
+      { "text": "대규모 데이터를 처리하고 시각화하는 기술", "type": "data" },
+      { "text": "최신 AI 프레임워크와 모델 활용법", "type": "ai" }
+    ]
+  },
+  {
+    "id": 10,
+    "text": "서비스 장애가 발생했을 때 나의 반응은?",
+    "options": [
+      { "text": "로그와 모니터링 도구부터 확인한다", "type": "devops" },
+      { "text": "프론트와 백엔드를 모두 훑어본다", "type": "fullstack" }
+    ]
+  }
+]
