@@ -14,6 +14,14 @@ app.use(express.json());
 // Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Root route
+app.get('/', (req, res) => {
+  res.send('<h1>Developer Test API Server</h1><p>Visit <a href="/api-docs">/api-docs</a> for documentation.</p>');
+});
+
+// Favicon route (prevent 404 CSP error)
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // GET /api/questions - 전체 질문 목록
 app.get('/api/questions', (req, res) => {
   res.json(questions);
