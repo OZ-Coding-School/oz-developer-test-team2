@@ -1,0 +1,2 @@
+cd developer-test-template
+pnpm dlx commitlint --edit $1
