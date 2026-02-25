@@ -3,6 +3,9 @@ import Card from '@/components/common/card';
 import ProgressBar from '../components/common/progressbar';
 import Button from '../components/common/button';
 
+// icon example
+import SparkleIcon from '@/assets/icons/SparkleIcon.svg?react';
+
 export default function HomePage() {
   return (
     <div>
@@ -13,7 +16,12 @@ export default function HomePage() {
           <Badge label="React" />
         </div>
         <ProgressBar />
-        <Button variant="primary" size="sm" className="m-4">
+        <Button
+          variant="primary"
+          size="sm"
+          className="m-4"
+          leftIcon={<SparkleIcon className="h-4 w-4 text-white" />}
+        >
           시작하기
         </Button>
       </Card>
