@@ -43,6 +43,7 @@ body {
   --color-text-body: var(--gray-700);
   --color-text-description: var(--gray-600);
   --color-text-muted: var(--gray-400);
+  --color-text-white: var(--gray-200);
 
   /* UI */
   --color-progress-track: var(--gray-200);
