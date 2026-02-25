@@ -7,3 +7,43 @@ body {
   min-height: 100vh;
   background: linear-gradient(180deg, var(--color-bg-default) 0%, #ffffff 100%);
 }
+
+/* =========================================
+   Primitive Colors
+   ========================================= */
+
+:root {
+  /* Brand */
+  --pink-400: #ef6d8a;
+  --pink-500: #e54d7f;
+  --pink-50: #fdf2f8;
+
+  /* Neutral (Gray scale) */
+  --gray-900: #1e2939;
+  --gray-700: #364153;
+  --gray-600: #4a5565;
+  --gray-400: #99a1af;
+  --gray-200: #e5e7eb;
+}
+
+/* =========================================
+   Semantic Tokens
+   ========================================= */
+
+@theme inline {
+  /* Background */
+  --color-bg-default: var(--pink-50);
+
+  /* Brand */
+  --color-primary: var(--pink-400);
+  --color-primary-hover: var(--pink-500);
+
+  /* Text */
+  --color-text-heading: var(--gray-900);
+  --color-text-body: var(--gray-700);
+  --color-text-description: var(--gray-600);
+  --color-text-muted: var(--gray-400);
+
+  /* UI */
+  --color-progress-track: var(--gray-200);
+}
