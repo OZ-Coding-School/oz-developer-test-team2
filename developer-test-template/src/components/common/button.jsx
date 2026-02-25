@@ -4,9 +4,13 @@ function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-/* =========================
-   Variant Styles
-========================= */
+const BASE_STYLE = `
+  inline-flex items-center gap-2
+  rounded-full font-semibold
+  transition-all duration-150
+  active:translate-y-[1px]
+  disabled:cursor-not-allowed disabled:opacity-50
+`;
 
 const VARIANT = {
   primary: `
@@ -23,7 +27,7 @@ const VARIANT = {
   option: `
     bg-bg-default
     text-description
-    text-[12px]
+    text-sm
     shadow-[0_2px_8px_rgba(30,41,57,0.06)]
     hover:brightness-[0.98]
     w-full
@@ -35,8 +39,8 @@ const VARIANT = {
 ========================= */
 
 const SIZE = {
-  sm: 'h-[48px] w-[262px] px-5 text-[14px]',
-  md: 'h-[48px] w-[384px] px-7 text-[15px]',
+  sm: 'h-[48px] w-full max-w-[262px] px-5 text-sm',
+  md: 'h-[48px] w-full max-w-[384px] px-7 text-sm',
 };
 
 function Button({
@@ -52,9 +56,7 @@ function Button({
   return (
     <button
       className={cn(
-        'inline-flex items-center rounded-full font-semibold',
-        'transition-all duration-150 active:translate-y-[1px]',
-        'disabled:cursor-not-allowed disabled:opacity-50',
+        BASE_STYLE,
         align === 'start' ? 'justify-start' : 'justify-center',
         SIZE[size],
         VARIANT[variant],
