@@ -1,13 +1,5 @@
 @import 'tailwindcss';
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(180deg, var(--color-bg-default) 0%, #ffffff 100%);
-}
-
 /* =========================================
    Primitive Colors
    ========================================= */
