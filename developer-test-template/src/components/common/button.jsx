@@ -27,10 +27,8 @@ const VARIANT = {
   option: `
     bg-bg-default
     text-description
-    text-sm
-    shadow-[0_2px_8px_rgba(30,41,57,0.06)]
-    hover:brightness-[0.98]
     w-full
+    shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1),0_1px_3px_0_rgba(0,0,0,0.1)]
   `,
 };
 
