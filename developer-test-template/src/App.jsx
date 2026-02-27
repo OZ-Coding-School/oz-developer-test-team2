@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RootLayout from '@/layouts/RootLayout';
 import HomePage from '@/pages/HomePage';
-import TestPage from '@/pages/TestPage';
+import QuizPage from '@/pages/QuizPage';
 import ResultPage from '@/pages/ResultPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function App() {
   return (
@@ -10,8 +10,8 @@ export default function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/test" element={<TestPage />} />
           <Route path="/result/:type" element={<ResultPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
