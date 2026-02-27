@@ -1,1 +1,1 @@
-// 해당 폴더에 api 로직을 작성해주세요
+export * from './result';
