@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getResultsByType } from '@/api/services';
-// import { useNavigate } from 'react-router-dom';
+import RestartIcon from '@/assets/icons/RestartIcon.svg?react';
 
-import Card from '@/components/common/card';
-import Button from '@/components/common/button';
-import CharacterIcon from '@/components/common/character';
+import { Card, Button, CharacterIcon } from '@/components/common';
 
 export default function ResultPage() {
   const { type } = useParams();
@@ -19,6 +17,7 @@ export default function ResultPage() {
       try {
         setLoading(true);
         const data = await getResultsByType(type);
+
         if (alive) setResult(data);
       } catch (e) {
         console.error(e);
@@ -84,6 +83,7 @@ export default function ResultPage() {
           className="mt-6 w-full"
           onClick={() => window.location.replace('/')}
         >
+          <RestartIcon className="h-5 w-5 text-white" />
           다시하기
         </Button>
       </div>
