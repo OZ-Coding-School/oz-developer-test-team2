@@ -1,10 +1,7 @@
 // import hamster from '@/assets/icon.webp';
-import Card from '@/components/common/card';
+import SparkleIcon from '@/assets/icons/SparkleIcon.svg?react';
+import { Button, Card, CharacterIcon } from '@/components/common';
 import { useNavigate } from 'react-router-dom';
-import SparkleIcon from '../assets/icons/SparkleIcon.svg?react';
-import Button from '../components/common/button';
-import CharacterIcon from '../components/common/character';
-// import { IMAGE_ASSETS } from '../constants/images';
 
 export default function HomePage() {
   const navigate = useNavigate();
