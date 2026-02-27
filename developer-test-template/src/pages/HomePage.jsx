@@ -1,8 +1,10 @@
-import hamster from '@/assets/icon.webp';
+// import hamster from '@/assets/icon.webp';
 import Card from '@/components/common/card';
 import { useNavigate } from 'react-router-dom';
 import SparkleIcon from '../assets/icons/SparkleIcon.svg?react';
 import Button from '../components/common/button';
+import CharacterIcon from '../components/common/character';
+// import { IMAGE_ASSETS } from '../constants/images';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -10,7 +12,8 @@ export default function HomePage() {
   return (
     <Card className="gap-8">
       <div className="flex flex-col items-center justify-center">
-        <img className="h-32 w-32" src={hamster} alt="hamster" />
+        {/* <img className="h-32 w-32" src={IMAGE_ASSETS.Icon} alt="hamster" /> */}
+        <CharacterIcon type={'Icon'} />
         <h3 className="mt-6 text-center text-2xl">나는 어떤 개발자일까?</h3>
         <p className="text-text-description mt-4">햄스터 개발자 유형 테스트</p>
       </div>
