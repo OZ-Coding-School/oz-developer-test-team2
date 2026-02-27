@@ -4,7 +4,7 @@ import App from './App.jsx';
 import './index.css';
 
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development') {
+  if (import.meta.env.MODE && import.meta.env.VITE_MSW !== 'true') {
     return;
   }
 

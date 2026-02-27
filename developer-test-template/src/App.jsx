@@ -11,7 +11,7 @@ export default function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/test" element={<TestPage />} />
-          <Route path="/result" element={<ResultPage />} />
+          <Route path="/result/:type" element={<ResultPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

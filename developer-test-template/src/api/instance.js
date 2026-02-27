@@ -1,1 +1,10 @@
-// 해당 파일에 axios instance를 설정하세요.
+import axios from 'axios';
+
+const instance = axios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL ?? '',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export default instance;
