@@ -15,7 +15,7 @@ const OPTION_BUTTON_CLASS = `
 text-text-body hover:bg-primary justify-start rounded-2xl! 
 text-base! font-medium! hover:text-white`;
 
-export default function QuizPage() {
+export default function QuestionPage() {
   // const navigate = useNavigate();
 
   return (
