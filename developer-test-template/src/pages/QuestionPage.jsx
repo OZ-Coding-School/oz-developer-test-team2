@@ -1,4 +1,5 @@
 import { Button, Card, CharacterIcon, ProgressBar } from '@/components/common';
+
 import * as Motion from 'motion/react';
 import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
@@ -78,6 +79,7 @@ export default function QuestionPage() {
             {data.options.map((option, index) => (
               <div key={index} className="mb-8 space-y-4">
                 <MotionButton
+                  key={option.text}
                   onClick={() => {
                     if (current < 5) {
                       setCurrent((prev) => prev + 1);
