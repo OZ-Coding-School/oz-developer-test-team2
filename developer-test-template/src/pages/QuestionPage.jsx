@@ -1,4 +1,32 @@
 import { Button, Card, CharacterIcon, ProgressBar } from '@/components/common';
+import * as Motion from 'motion/react';
+import { AnimatePresence } from 'motion/react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const OPTION_BUTTON_CLASS = `
+text-text-body hover:bg-primary justify-start rounded-2xl! 
+text-base! font-medium! hover:text-white h-14!`;
+
+const MotionButton = Motion.motion(Button);
+const MotionCharacterIcon = Motion.motion(CharacterIcon);
+
+const PAGE_TRANSITION = {
+  duration: 0.4,
+};
+
+const FADE_UP = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4 },
+};
+
+const SLIDE_PAGE = {
+  initial: { x: 50, opacity: 0 },
+  animate: { x: 0, opacity: 1 },
+  exit: { x: -50, opacity: 0 },
+  transition: PAGE_TRANSITION,
+};
 
 import * as Motion from 'motion/react';
 import { AnimatePresence } from 'motion/react';
@@ -79,7 +107,10 @@ export default function QuestionPage() {
             {data.options.map((option, index) => (
               <div key={index} className="mb-8 space-y-4">
                 <MotionButton
+<<<<<<< HEAD
                   key={option.text}
+=======
+>>>>>>> 196018f (feat: add QuestionPage animation effects)
                   onClick={() => {
                     if (current < 5) {
                       setCurrent((prev) => prev + 1);
