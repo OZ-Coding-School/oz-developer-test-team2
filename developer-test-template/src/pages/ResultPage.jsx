@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getResultsByType } from '@/api/services';
 import RestartIcon from '@/assets/icons/RestartIcon.svg?react';
+import ShareIcon from '@/assets/icons/ShareIcon.svg?react';
 
 import { Card, Button, CharacterIcon } from '@/components/common';
 
@@ -42,22 +43,22 @@ export default function ResultPage() {
   const { emoji, name, title, description, characteristics, hashtags } = result;
 
   return (
-    <div className="grid min-h-screen place-items-center bg-transparent p-6">
-      <div className="w-[360px] rounded-2xl bg-white p-6 shadow-xl">
+    <Card>
+      <div className="grid min-h-screen place-items-center bg-transparent p-3">
         <p className="text-center text-xs text-gray-500">당신의 개발자 유형</p>
 
-        <h1 className="mt-1 text-center font-bold text-pink-500">{name}</h1>
+        <h1 className="text-center font-bold text-pink-500">{name}</h1>
 
-        <div className="mt-4 flex justify-center">
+        <div className="flex justify-center">
           <CharacterIcon type={type} size={88} />
         </div>
 
-        {emoji ? <p className="mt-2 text-center text-xl">{emoji}</p> : null}
+        {emoji ? <p className="text-center text-xl">{emoji}</p> : null}
 
-        <h2 className="mt-3 text-center font-semibold">{title}</h2>
-        <p className="mt-2 text-center text-sm text-gray-600">{description}</p>
+        <h2 className="text-center font-semibold">{title}</h2>
+        <p className="text-center text-sm text-gray-600">{description}</p>
 
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
+        <div className="flex w-full flex-wrap justify-center gap-2">
           {hashtags?.map((h) => (
             <span
               key={h}
@@ -68,7 +69,7 @@ export default function ResultPage() {
           ))}
         </div>
 
-        <div className="mt-5 rounded-xl bg-pink-50 p-4">
+        <div className="w-full rounded-xl bg-pink-50 p-4">
           <p className="mb-3 text-center text-sm font-semibold">나의 특징</p>
           <ul className="space-y-2 text-sm text-gray-700">
             {characteristics?.map((c, i) => (
@@ -79,14 +80,18 @@ export default function ResultPage() {
             ))}
           </ul>
         </div>
-        <Button
-          className="mt-6 w-full"
-          onClick={() => window.location.replace('/')}
-        >
-          <RestartIcon className="h-5 w-5 text-white" />
-          다시하기
+        <Button className="w-full" onClick={() => window.location.replace('/')}>
+          <ShareIcon className="h-5 w-5 text-white" />
+          결과 공유하기
+        </Button>
+        <Button variant="secondary" className="w-full">
+          <RestartIcon
+            className="text-primary h-5 w-5"
+            onClick={() => window.location.replace('/')}
+          />
+          다시 테스트하기
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }
