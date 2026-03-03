@@ -18,7 +18,7 @@ export default function HomePage() {
         <p>✨ 5개의 질문으로 알아보는 </p>
         <p>나의 개발자 성향</p>
       </div>
-      <Button onClick={() => navigate('/quiz')}>
+      <Button onClick={() => navigate('/question')}>
         <SparkleIcon className="h-5 w-5 text-white" />
         시작하기
       </Button>
