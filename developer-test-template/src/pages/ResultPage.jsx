@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getResultsByType } from '@/api/services';
 import RestartIcon from '@/assets/icons/RestartIcon.svg?react';
 import ShareIcon from '@/assets/icons/ShareIcon.svg?react';
@@ -10,6 +10,7 @@ export default function ResultPage() {
   const { type } = useParams();
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let alive = true;
@@ -80,15 +81,16 @@ export default function ResultPage() {
             ))}
           </ul>
         </div>
-        <Button className="w-full" onClick={() => window.location.replace('/')}>
+        <Button className="w-full" onClick={() => navigate('/')}>
           <ShareIcon className="h-5 w-5 text-white" />
           결과 공유하기
         </Button>
-        <Button variant="secondary" className="w-full">
-          <RestartIcon
-            className="text-primary h-5 w-5"
-            onClick={() => window.location.replace('/')}
-          />
+        <Button
+          variant="secondary"
+          className="w-full"
+          onClick={() => navigate('/')}
+        >
+          <RestartIcon className="text-primary h-5 w-5" />
           다시 테스트하기
         </Button>
       </div>
