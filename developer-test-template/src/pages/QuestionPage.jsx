@@ -60,14 +60,9 @@ export default function QuestionPage() {
         return prev + 1;
       });
     } else {
-<<<<<<< HEAD
-      // 마지막 질문이면 결과 페이지로 이동
-      navigate(`/result/${option.type}`);
-=======
       // 마지막 질문이면 누적 결과 계산 후 이동
       const finalType = getResultType();
       navigate(`/result/${finalType}`);
->>>>>>> c7fc1ad (feat: implement accumulated result calculation using zustand store)
     }
   };
   console.log(currentLevel.options);
