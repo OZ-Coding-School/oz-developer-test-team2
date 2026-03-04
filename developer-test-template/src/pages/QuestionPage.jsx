@@ -1,5 +1,6 @@
 import { Button, Card, CharacterIcon, ProgressBar } from '@/components/common';
 import { useQuestion } from '@/hooks/queries';
+import { useStore } from '@/store';
 import * as Motion from 'motion/react';
 import { AnimatePresence } from 'motion/react';
 import { useState } from 'react';
@@ -31,12 +32,38 @@ const SLIDE_PAGE = {
 
 export default function QuestionPage() {
   const [current, setCurrent] = useState(0);
+  const [isLocked, setIsLocked] = useState(false);
   const navigate = useNavigate();
   const { data, isLoading } = useQuestion();
+  const selectAnswer = useStore((state) => state.selectAnswer);
   const currentLevel = data?.[current];
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const handleSave = (option) => {
+    // 이미 클릭 처리 중이면 중복 실행 방지
+    if (isLocked) return;
+
+    setIsLocked(true);
+
+    // 선택한 타입을 Zustand store에 저장
+    selectAnswer(option.type);
+
+    // 다음 질문이 남아있으면 index 증가
+    if (current < data.length - 1) {
+      setCurrent((prev) => {
+        // 다음 질문으로 넘어가면서 잠금 해제
+        setIsLocked(false);
+        return prev + 1;
+      });
+    } else {
+      // 마지막 질문이면 결과 페이지로 이동
+      navigate('/result');
+    }
+  };
+  console.log(currentLevel.options);
 
   return (
     <AnimatePresence mode="wait">
@@ -74,14 +101,8 @@ export default function QuestionPage() {
           <div className="my-8 space-y-4">
             {currentLevel.options?.map((option) => (
               <MotionButton
-                key={option.text}
-                onClick={() => {
-                  if (current < data.length - 1) {
-                    setCurrent((prev) => prev + 1);
-                  } else {
-                    navigate('/result/:type');
-                  }
-                }}
+                key={`${currentLevel.id}-${option.type}`}
+                onClick={() => handleSave(option)}
                 variant="option"
                 className={`${OPTION_BUTTON_CLASS}`}
                 whileHover={{ scale: 1.03 }}
