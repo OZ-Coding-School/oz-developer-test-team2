@@ -1,16 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getResultsByType } from '@/api/services';
 import RestartIcon from '@/assets/icons/RestartIcon.svg?react';
 import ShareIcon from '@/assets/icons/ShareIcon.svg?react';
 
-import { Card, Button, CharacterIcon } from '@/components/common';
+import { Card, Button, CharacterIcon, Toast } from '@/components/common';
+import { useToast, useWebShare } from '@/hooks';
 
 export default function ResultPage() {
   const { type } = useParams();
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const { message, show } = useToast();
+  const { share } = useWebShare(show);
+
+  const shareUrl = useMemo(() => {
+    if (typeof window === 'undefined') return '';
+    return new URL(`/result/${type}`, window.location.href).toString();
+  }, [type]);
+
+  const handleShare = async () => {
+    if (!result) return;
+
+    const typeName = result.name ?? type;
+    const typeDesc = result.description ?? '';
+    const text = `나는 "${typeName}"! 🐹 ${typeDesc} 나는 어떤 개발자일까? 테스트 해보기`;
+
+    await share({ title: text, text, url: shareUrl }, `${text}\n${shareUrl}`);
+  };
+  // 추후 모달창으로 변경 예정
 
   useEffect(() => {
     let alive = true;
@@ -81,10 +101,11 @@ export default function ResultPage() {
             ))}
           </ul>
         </div>
-        <Button className="w-full" onClick={() => navigate('/')}>
+        <Button className="w-full" onClick={() => handleShare?.()}>
           <ShareIcon className="h-5 w-5 text-white" />
           결과 공유하기
         </Button>
+        <Toast message={message} />
         <Button
           variant="secondary"
           className="w-full"
