@@ -6,6 +6,7 @@ import ShareIcon from '@/assets/icons/ShareIcon.svg?react';
 
 import { Card, Button, CharacterIcon, Toast } from '@/components/common';
 import { useToast, useWebShare } from '@/hooks';
+import { motion } from 'motion/react';
 
 export default function ResultPage() {
   const { type } = useParams();
@@ -15,6 +16,8 @@ export default function ResultPage() {
 
   const { message, show } = useToast();
   const { share } = useWebShare(show);
+
+  const MotionCharacterIcon = motion(CharacterIcon);
 
   const shareUrl = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -64,57 +67,82 @@ export default function ResultPage() {
   const { emoji, name, title, description, characteristics, hashtags } = result;
 
   return (
-    <Card>
-      <div className="grid min-h-screen place-items-center bg-transparent p-3">
-        <p className="text-center text-xs text-gray-500">당신의 개발자 유형</p>
+    <motion.div
+      className="min-h-screen bg-transparent p-3"
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: 'easeOut' }}
+    >
+      <Card>
+        <div className="grid min-h-screen place-items-center bg-transparent p-3">
+          <p className="text-center text-xs text-gray-500">
+            당신의 개발자 유형
+          </p>
 
-        <h1 className="text-center font-bold text-pink-500">{name}</h1>
+          <h1 className="text-center font-bold text-pink-500">{name}</h1>
 
-        <div className="flex justify-center">
-          <CharacterIcon type={type} size={88} />
-        </div>
+          <div className="flex justify-center">
+            <MotionCharacterIcon
+              type={type}
+              size={88}
+              initial={{ rotate: -10, scale: 0.8 }}
+              animate={{ rotate: [-10, 10, -10, 6, -6], scale: 1 }}
+              transition={{
+                rotate: {
+                  duration: 4,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                },
+                scale: {
+                  duration: 0.5,
+                  type: 'spring',
+                },
+              }}
+            />
+          </div>
 
-        {emoji ? <p className="text-center text-xl">{emoji}</p> : null}
+          {emoji ? <p className="text-center text-xl">{emoji}</p> : null}
 
-        <h2 className="text-center font-semibold">{title}</h2>
-        <p className="text-center text-sm text-gray-600">{description}</p>
+          <h2 className="text-center font-semibold">{title}</h2>
+          <p className="text-center text-sm text-gray-600">{description}</p>
 
-        <div className="flex w-full flex-wrap justify-center gap-2">
-          {hashtags?.map((h) => (
-            <span
-              key={h}
-              className="rounded-full bg-pink-50 px-3 py-1 text-xs text-pink-600"
-            >
-              {h}
-            </span>
-          ))}
-        </div>
-
-        <div className="w-full rounded-xl bg-pink-50 p-4">
-          <p className="mb-3 text-center text-sm font-semibold">나의 특징</p>
-          <ul className="space-y-2 text-sm text-gray-700">
-            {characteristics?.map((c, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-pink-400" />
-                <span>{c}</span>
-              </li>
+          <div className="flex w-full flex-wrap justify-center gap-2">
+            {hashtags?.map((h) => (
+              <span
+                key={h}
+                className="rounded-full bg-pink-50 px-3 py-1 text-xs text-pink-600"
+              >
+                {h}
+              </span>
             ))}
-          </ul>
+          </div>
+
+          <div className="w-full rounded-xl bg-pink-50 p-4">
+            <p className="mb-3 text-center text-sm font-semibold">나의 특징</p>
+            <ul className="space-y-2 text-sm text-gray-700">
+              {characteristics?.map((c, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-pink-400" />
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <Button className="w-full" onClick={() => handleShare?.()}>
+            <ShareIcon className="h-5 w-5 text-white" />
+            결과 공유하기
+          </Button>
+          <Button
+            variant="secondary"
+            className="w-full"
+            onClick={() => navigate('/')}
+          >
+            <RestartIcon className="text-primary h-5 w-5" />
+            다시 테스트하기
+          </Button>
+          <Toast message={message} />
         </div>
-        <Button className="w-full" onClick={() => handleShare?.()}>
-          <ShareIcon className="h-5 w-5 text-white" />
-          결과 공유하기
-        </Button>
-        <Toast message={message} />
-        <Button
-          variant="secondary"
-          className="w-full"
-          onClick={() => navigate('/')}
-        >
-          <RestartIcon className="text-primary h-5 w-5" />
-          다시 테스트하기
-        </Button>
-      </div>
-    </Card>
+      </Card>
+    </motion.div>
   );
 }
