@@ -74,7 +74,7 @@ export default function ResultPage() {
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       <Card>
-        <div className="grid min-h-screen place-items-center bg-transparent p-3">
+        <div className="grid min-h-screen place-items-center gap-2 bg-transparent p-3">
           <p className="text-center text-xs text-gray-500">
             당신의 개발자 유형
           </p>
