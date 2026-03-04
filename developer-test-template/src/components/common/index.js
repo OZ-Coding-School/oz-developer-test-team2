@@ -1,3 +1,4 @@
+export { default as RainAnimation } from './animation/rainAnimation';
 export { default as badge } from './badge';
 export { default as Button } from './Button';
 export { default as Card } from './Card';

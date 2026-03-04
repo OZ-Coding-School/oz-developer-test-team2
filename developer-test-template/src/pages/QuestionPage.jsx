@@ -60,7 +60,7 @@ export default function QuestionPage() {
       });
     } else {
       // 마지막 질문이면 결과 페이지로 이동
-      navigate('/result');
+      navigate(`/result/${option.type}`);
     }
   };
   console.log(currentLevel.options);
@@ -68,12 +68,12 @@ export default function QuestionPage() {
   return (
     <AnimatePresence mode="wait">
       <Motion.motion.div key={current} {...SLIDE_PAGE}>
-        <Card className="mt-10">
+        <Card className="relative mt-10">
           <ProgressBar value={current + 1} />
 
           <MotionCharacterIcon
             type="Icon"
-            className="[&_img]:h-32 [&_img]:w-32"
+            className="relative z-20 [&_img]:h-32 [&_img]:w-32"
             initial={{ rotate: -10, scale: 0.8 }}
             animate={{ rotate: [-10, 10, -10, 6, -6], scale: 1 }}
             transition={{
