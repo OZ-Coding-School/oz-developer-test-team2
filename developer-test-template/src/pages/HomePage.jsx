@@ -12,7 +12,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Card className="relative z-10 bg-white [&>span]:mt-6">
+      <Card className="relative bg-white [&>span]:mt-6">
         <Motion.motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function HomePage() {
               ease: 'easeInOut',
             }}
             type={'Icon'}
-            className="[&_img]:h-32 [&_img]:w-32"
+            className="relative z-20 [&_img]:h-32 [&_img]:w-32"
           />
           <h3 className="text-center text-3xl">나는 어떤 개발자일까?</h3>
           <p className="text-text-description mt-4">
