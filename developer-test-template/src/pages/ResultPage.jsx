@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 import { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getResultsByType } from '@/api/services';
@@ -18,6 +16,8 @@ export default function ResultPage() {
 
   const { message, show } = useToast();
   const { share } = useWebShare(show);
+
+  const MotionCharacterIcon = motion(CharacterIcon);
 
   const shareUrl = useMemo(() => {
     if (typeof window === 'undefined') return '';
@@ -82,7 +82,23 @@ export default function ResultPage() {
           <h1 className="text-center font-bold text-pink-500">{name}</h1>
 
           <div className="flex justify-center">
-            <CharacterIcon type={type} size={88} />
+            <MotionCharacterIcon
+              type={type}
+              size={88}
+              initial={{ rotate: -10, scale: 0.8 }}
+              animate={{ rotate: [-10, 10, -10, 6, -6], scale: 1 }}
+              transition={{
+                rotate: {
+                  duration: 4,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                },
+                scale: {
+                  duration: 0.5,
+                  type: 'spring',
+                },
+              }}
+            />
           </div>
 
           {emoji ? <p className="text-center text-xl">{emoji}</p> : null}
